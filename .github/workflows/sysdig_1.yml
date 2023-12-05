@@ -19,7 +19,7 @@ jobs:
       uses: sysdiglabs/scan-action@v3
       with:
         # Tag of the image to analyse
-        image-tag: "sysdiglabs/dummy-vuln-app:latest"
+        image-tag: "justinjeon79/git_sysdig/TEST:latest"
         # API token for Sysdig Scanning auth
         sysdig-secure-token: ${{ secrets.SECURE_API_TOKEN }}
         dockerfile-path: ./Dockerfile
