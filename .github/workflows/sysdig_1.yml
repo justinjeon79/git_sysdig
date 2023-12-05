@@ -1,6 +1,6 @@
 env:
     SYSDIG_SECURE_ENDPOINT: "https://secure.sysdig.com"
-    REGISTRY_HOST: "ghcr.io"
+    REGISTRY_HOST: "quay.io"
     IMAGE_NAME: "mytestimage"
     IMAGE_TAG: "my-tag"
     DOCKERFILE_CONTEXT: "TEST"
