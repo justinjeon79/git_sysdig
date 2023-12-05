@@ -1,5 +1,5 @@
 env:
-    SYSDIG_SECURE_ENDPOINT: "https://eu1.app.sysdig.com"
+    SYSDIG_SECURE_ENDPOINT: "https://secure.sysdig.com"
     REGISTRY_HOST: "quay.io"
     IMAGE_NAME: "mytestimage"
     IMAGE_TAG: "my-tag"
@@ -68,4 +68,4 @@ jobs:
       with:
         context: ${{ env.DOCKERFILE_CONTEXT }}
         push: true
-        tags: ${{ env.REGISTRY_HOST }}/${{ secrets.REGISTRY_USER }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+        tags: ${{ env. }}/${{ secrets.REGISTRY_USER }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
