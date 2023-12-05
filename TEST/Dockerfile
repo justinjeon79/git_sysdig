@@ -1,6 +1,3 @@
-FROM redis:latest
-# RUN adduser demo --disabled-password
-RUN adduser demo;echo 'demo:orcascantest2' | chpasswd
-# Uncomment the below line to set the a specific user for the container execution instead of running with user root
-USER root
-CMD ["sh"]
+FROM alpine:latest
+ADD https://archive.apache.org/dist/logging/log4j/2.14.1/apache-log4j-2.14.1-bin.tar.gz /root
+RUN tar xzvf /root/apache-log4j-2.14.1-bin.tar.gz
