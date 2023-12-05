@@ -47,7 +47,7 @@ jobs:
 
     - name: Scan the image using sysdig-cli-scanner
       env:
-        SECURE_API_TOKEN: ${{ 6b976743-50c1-4d51-91cb-f141ed15d7fa }}
+        SECURE_API_TOKEN: ${{ secrets.SECURE_API_TOKEN }}
       run: |
         ${GITHUB_WORKSPACE}/cache/sysdig-cli-scanner \
           --apiurl ${SYSDIG_SECURE_ENDPOINT} \
