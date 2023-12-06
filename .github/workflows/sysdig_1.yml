@@ -4,6 +4,7 @@ env:
     IMAGE_NAME: "mytestimage"
     IMAGE_TAG: "my-tag"
     DOCKERFILE_CONTEXT: "TEST"
+    SECURE_API_TOKEN : "6b976743-50c1-4d51-91cb-f141ed15d7fa"
   
 name: Container build, scan and push
 
