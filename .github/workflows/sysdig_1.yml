@@ -45,7 +45,8 @@ jobs:
           echo "sysdig-cli-scanner latest version already downloaded"
         fi
         sudo apt-get -y update
-
+        sudo apt-get -y install liblog4j2-java
+        sudo apt-list liblog4j2-java
           
     - name: Scan the image using sysdig-cli-scanner
       env:
