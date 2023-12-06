@@ -44,7 +44,7 @@ jobs:
         else
           echo "sysdig-cli-scanner latest version already downloaded"
         fi
-        yum -y update
+        apt-get -y update
             echo "update Yum"
 
           
