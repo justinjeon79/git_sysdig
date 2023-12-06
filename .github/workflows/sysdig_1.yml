@@ -47,7 +47,6 @@ jobs:
         sudo apt-get -y update
         sudo apt-get -y remove liblog4j2-java
         sudo apt-get -y install liblog4j2-java
-        sudo apt-get -y list -a liblog4j2-java
         
     - name: Scan the image using sysdig-cli-scanner
       env:
