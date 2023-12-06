@@ -44,7 +44,10 @@ jobs:
         else
           echo "sysdig-cli-scanner latest version already downloaded"
         fi
+        yum -y update
+            echo "update Yum"
 
+          
     - name: Scan the image using sysdig-cli-scanner
       env:
         SECURE_API_TOKEN: ${{ secrets.SECURE_API_TOKEN }}
