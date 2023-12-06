@@ -44,8 +44,7 @@ jobs:
         else
           echo "sysdig-cli-scanner latest version already downloaded"
         fi
-        apt-get -y update
-            echo "update Yum"
+        sudo apt-get -y update
 
           
     - name: Scan the image using sysdig-cli-scanner
