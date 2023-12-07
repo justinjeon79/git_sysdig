@@ -5,7 +5,7 @@ env:
     IMAGE_TAG: "my-tag"
     DOCKERFILE_CONTEXT: "TEST"
   
-name: Container build, scan and push
+name: Container build, scan and push, Dockerizing to Amazon ECR
 
 on: [push, pull_request]
 
@@ -67,16 +67,14 @@ jobs:
 
 
 
-name: Dockerizing to Amazon ECR
-
-    on:
-     push:
+  on:
+    push:
       branches:
         - master
 
     env:
         AWS_REGION: ap-northeast-2                   # set this to your preferred AWS region, e.g. us-west-1
-        ECR_REPOSITORY: github # set this to your Amazon ECR repository name
+        ECR_REPOSITORY: github                       # set this to your Amazon ECR repository name
 
 #  ECS_SERVICE: MY_ECS_SERVICE                 # set this to your Amazon ECS service name
 #  ECS_CLUSTER: MY_ECS_CLUSTER                 # set this to your Amazon ECS cluster name
