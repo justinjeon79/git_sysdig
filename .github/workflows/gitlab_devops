@@ -1,0 +1,53 @@
+variables:
+  SYSDIG_SECURE_ENDPOINT: "https://us2.app.sysdig.com"
+  CI_IMAGE_TAG: "latest"
+  TARGET_REGISTRY_IMAGE: "446805103418.dkr.ecr.ap-northeast-2.amazonaws.com/sysdig-test"
+  TARGET_REGISTRY: "446805103418.dkr.ecr.ap-northeast-2.amazonaws.com"
+
+stages:
+  - build
+  - scan
+  - push
+
+image:build:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - /kaniko/executor --dockerfile Dockerfile --destination $TARGET_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA --no-push --oci-layout-path $(pwd)/build/ --tarPath $(pwd)/build/$CI_IMAGE_TAG.tar
+  artifacts:
+    paths:
+      - build/
+    expire_in: 1 days
+
+image:scan:
+  stage: scan
+  before_script:
+    - apk add --no-cache jq curl python3 py3-pip gettext libintl && pip install awscli --upgrade bash
+  script:
+    - mkdir reports
+    - curl -LO https://download.sysdig.com/scanning/bin/sysdig-cli-scanner/$(curl -L -s https://download.sysdig.com/scanning/sysdig-cli-scanner/latest_version.txt)/linux/amd64/sysdig-cli-scanner
+    - chmod +x ./sysdig-cli-scanner
+    - ./sysdig-cli-scanner --console-log  --apiurl $SYSDIG_SECURE_ENDPOINT file://$(pwd)/build/$CI_IMAGE_TAG.tar
+  artifacts:
+    paths:
+      - reports
+      - build/
+    expire_in: 1 days
+    when: always
+  needs:
+    - image:build
+
+image:push:
+  stage: push
+  # image:
+  #   name: gcr.io/go-containerregistry/crane:debug
+  #   entrypoint: [""]
+  before_script:
+    - apk add --no-cache jq curl crane python3 py3-pip gettext libintl && pip install awscli --upgrade bash
+  script:
+    - crane auth login -u "AWS" -p $(aws ecr get-login-password --region $AWS_DEFAULT_REGION) $TARGET_REGISTRY
+    - crane push build/$CI_IMAGE_TAG.tar $TARGET_REGISTRY_IMAGE:$CI_IMAGE_TAG
+  needs:
+    - image:scan
