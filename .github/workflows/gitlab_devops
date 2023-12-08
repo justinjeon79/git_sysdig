@@ -1,8 +1,8 @@
 variables:
   SYSDIG_SECURE_ENDPOINT: "https://us2.app.sysdig.com"
   CI_IMAGE_TAG: "latest"
-  TARGET_REGISTRY_IMAGE: "446805103418.dkr.ecr.ap-northeast-2.amazonaws.com/sysdig-test"
-  TARGET_REGISTRY: "446805103418.dkr.ecr.ap-northeast-2.amazonaws.com"
+  TARGET_REGISTRY_IMAGE: "361988965076.dkr.ecr.ap-northeast-2.amazonaws.com/sysdig-test"
+  TARGET_REGISTRY: "361988965076.dkr.ecr.ap-northeast-2.amazonaws.com"
 
 stages:
   - build
